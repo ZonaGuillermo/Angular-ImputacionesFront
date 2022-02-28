@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-<<<<<<< HEAD
 import { LoginComponent } from './components/login/login.component';
 import { CheckComponent } from './components/check/check.component';
 import { ImputationComponent } from './components/imputation/imputation.component';
@@ -22,18 +21,7 @@ const routes: Routes = [
   // { path: 'check', component: CheckComponent, canActivate: [LoginGuard] }, // Esta ruta tendrá guards
 ];
 
-=======
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
 
-const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'home', component: HomeComponent },
-  { path: 'login', component: HomeComponent },
-  // { path: 'calendar', component: CalendarComponent}
-  { path: '**', redirectTo: '/home' }
-];
->>>>>>> 2c9773085134bc40d5c5b9df45c09fd69fb361a9
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
