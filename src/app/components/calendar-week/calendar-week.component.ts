@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+//import * as moment from 'moment'
 
 @Component({
   selector: 'app-calendar-week',
@@ -12,4 +13,7 @@ export class CalendarWeekComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // getWeek() {
+
+  // }
 }

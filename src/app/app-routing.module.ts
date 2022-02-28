@@ -4,13 +4,15 @@ import { LoginComponent } from './components/login/login.component';
 import { CheckComponent } from './components/check/check.component';
 import { ImputationComponent } from './components/imputation/imputation.component';
 import { ImputationTableComponent } from './components/imputation-table/imputation-table.component';
+import { CalendarWeekComponent } from './components/calendar-week/calendar-week.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: LoginComponent },
+  { path: '', pathMatch: 'full', redirectTo: '/login' },
   { path: 'login', component: LoginComponent },
   { path: 'imputation', component: ImputationComponent },
+  { path: 'calendarWeek', component: ImputationComponent },
   { path: 'check', component: CheckComponent },
-  { path: '**', redirectTo: '/login' },
+  { path: '**', redirectTo: '/login' }
   // {
   //   path: 'imputation', component: ImputationComponent, children: [
   //     { path: '', component: ImputationTableComponent },
