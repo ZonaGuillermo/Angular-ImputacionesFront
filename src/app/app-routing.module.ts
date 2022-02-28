@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { CheckComponent } from './components/check/check.component';
 import { ImputationComponent } from './components/imputation/imputation.component';
@@ -8,7 +7,6 @@ import { ImputationTableComponent } from './components/imputation-table/imputati
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'imputation', component: ImputationComponent },
   { path: 'check', component: CheckComponent },
