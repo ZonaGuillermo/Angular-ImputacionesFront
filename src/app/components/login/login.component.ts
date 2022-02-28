@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
-=======
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
->>>>>>> 2c9773085134bc40d5c5b9df45c09fd69fb361a9
 
 @Component({
   selector: 'app-login',
@@ -13,9 +10,6 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class LoginComponent implements OnInit {
 
-<<<<<<< HEAD
-  constructor() { }
-=======
   loginForm: FormGroup;
   constructor(
     private usersService: UsersService,
@@ -33,13 +27,10 @@ export class LoginComponent implements OnInit {
       ]),
     }, [])
   }
->>>>>>> 2c9773085134bc40d5c5b9df45c09fd69fb361a9
 
   ngOnInit(): void {
   }
 
-<<<<<<< HEAD
-=======
   async onLogin(pForm: any) {
     let response = await this.usersService.Login(pForm.value);
     if (response.token) {
@@ -58,5 +49,4 @@ export class LoginComponent implements OnInit {
       return false;
     }
   }
->>>>>>> 2c9773085134bc40d5c5b9df45c09fd69fb361a9
 }
