@@ -1,0 +1,26 @@
+/*
+th, td {
+	padding: 0.2em;
+	border: 1px solid cornflowerblue;
+}
+td {
+	text-align: center;
+}
+*/
+
+ul, form {
+	display: inline-block;
+}
+
+input {
+	display: flex;
+	flex-direction: column;
+	text-align: right;
+	padding: 2px;
+}
+
+.proyectForm input[readonly]{
+	border: 0;
+	background-color: transparent;
+	text-align: left;
+}
