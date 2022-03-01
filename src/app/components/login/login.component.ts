@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
     let response = await this.usersService.Login(pForm.value);
     if (response.token) {
       localStorage.setItem('token', response.token)
-      this.router.navigate(['home']);
+      localStorage.setItem('user', response.user);
+      this.router.navigate(['imputation']);
     } else {
       alert(response.error)
     }

@@ -1,40 +1,45 @@
 <div class="container">
 	<div class="row">
-		<div class="col-12 d-flex aling-items-start">
+		<div class="col-12">
 
-			<form [formGroup]="registerImputations" class="proyectForm m-2 text-center">
-				<h5>Proyectos</h5>
-				<input type="text" name="project1" value="Proyecto1" readonly class="form-control mb-2">
-				<input type="text" name="project2" value="Proyecto2" readonly class="form-control mb-2">
-				<input type="text" name="project3" value="Proyecto3" readonly class="form-control mb-2">
-				<input type="text" name="project4" value="Proyecto4" readonly class="form-control mb-2">
-				<input type="text" name="project5" value="Proyecto5" readonly class="form-control mb-2">
+			<form #registerImputations="ngForm" class="m-2" (ngSubmit)="OnRegisterImputations(registerImputations)">
+				<table class="table">
+					<thead>
+						<th>#</th>
+						<th>Lunes</th>
+						<th>Martes</th>
+						<th>Miércoles</th>
+						<th>Jueves</th>
+						<th>Viernes</th>
+						<th>Sábado</th>
+						<th>Domingo</th>
+					</thead>
+					<tbody>
+						<tr>
+							<th>Proyecto1</th>
+							<td><input type="number" name="1-lunes" min="0" max="9" class="form-control" ngModel></td>
+							<td><input type="number" name="1-martes" min="0" max="9" class="form-control" ngModel></td>
+							<td><input type="number" name="1-miercoles" min="0" max="9" class="form-control" ngModel></td>
+							<td><input type="number" name="1-jueves" min="0" max="9" class="form-control" ngModel></td>
+							<td><input type="number" name="1-viernes" min="0" max="9" class="form-control" ngModel></td>
+							<td><input type="number" name="1-sabado" min="0" max="9" class="form-control" ngModel></td>
+							<td><input type="number" name="1-domingo" min="0" max="9" class="form-control" ngModel></td>
+						</tr>
+						<tr>
+							<th>Proyecto2</th>
+							<td><input type="number" name="2-lunes" min="0" max="9" class="form-control" ngModel></td>
+							<td><input type="number" name="2-martes" min="0" max="9" class="form-control" ngModel></td>
+							<td><input type="number" name="2-miercoles" min="0" max="9" class="form-control" ngModel></td>
+							<td><input type="number" name="2-jueves" min="0" max="9" class="form-control" ngModel></td>
+							<td><input type="number" name="2-viernes" min="0" max="9" class="form-control" ngModel></td>
+							<td><input type="number" name="2-sabado" min="0" max="9" class="form-control" ngModel></td>
+							<td><input type="number" name="2-domingo" min="0" max="9" class="form-control" ngModel></td>
+						</tr>
+					</tbody>
+				</table>
+				<input type="submit" value="Guardar" class="btn btn-success btn-lg">
 			</form>
-
-			<form [formGroup]="registerImputations" class="m-2 text-center">
-				<h5>Lunes</h5>
-				<input type="hidden" name="monday" value="Lunes" class="form-control">
-				<input type="number" name="project1" id="" min="0" max="9" class="form-control mb-2">
-				<input type="number" name="project2" id="" min="0" max="9" class="form-control mb-2">
-				<input type="number" name="project3" id="" min="0" max="9" class="form-control mb-2">
-				<input type="number" name="project4" id="" min="0" max="9" class="form-control mb-2">
-				<input type="number" name="project5" id="" min="0" max="9" class="form-control mb-2">
-				<input type="submit" value="Guardar" class="btn btn-success w-100 p-1 mb-2 text-center">
-				<p>No enviado</p>
-			</form>
-
-			<form [formGroup]="registerImputations" class="m-2 text-center">
-				<h5>Martes</h5>
-				<input type="hidden" name="monday" value="Martes" class="form-control">
-				<input type="number" name="project1" id="" min="0" max="9" class="form-control mb-2">
-				<input type="number" name="project2" id="" min="0" max="9" class="form-control mb-2">
-				<input type="number" name="project3" id="" min="0" max="9" class="form-control mb-2">
-				<input type="number" name="project4" id="" min="0" max="9" class="form-control mb-2">
-				<input type="number" name="project5" id="" min="0" max="9" class="form-control mb-2">
-				<input type="submit" value="Guardar" class="btn btn-success w-100 p-1 mb-2">
-				<p>No enviado</p>
-			</form>
-
+		
 		</div>
 	</div>
 </div>
