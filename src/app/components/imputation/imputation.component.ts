@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-imputation',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImputationComponent implements OnInit {
 
-  constructor() { }
+  user: User | null;
+
+  constructor() {
+    this.user = JSON.parse(localStorage.getItem('user')!); // el (!) evita el null
+  }
+
 
   ngOnInit(): void {
   }

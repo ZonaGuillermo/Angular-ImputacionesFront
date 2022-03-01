@@ -16,8 +16,7 @@
             <input type="password" class="form-control" id="password" placeholder="Password" FormcontrolName="password"
               required>
             <p *ngIf="checkControl('password', 'required')" class="text-danger">Campo requerido</p>
-            <p *ngIf="checkControl('password', 'minlength')" class="text-danger">El password tiene que tener longitud
-              minima de 8</p>
+            <p *ngIf="checkControl('password', 'minlength')" class="text-danger">El password tiene que tener longitud minima de 8 caractéres</p>
           </div>
 
           <br>

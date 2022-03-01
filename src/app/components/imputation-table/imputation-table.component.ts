@@ -17,4 +17,14 @@ export class ImputationTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
+    OnRegisterImputations(pForm: any) {
+    for (let key in pForm.value) {
+      if (pForm.value[key] != "") {
+        let idProyecto = parseInt(key.split('-')[0]);
+        let diaSemana = key.split('-')[1];
+        console.log(idProyecto, diaSemana, pForm.value[key]);
+      }
+    }
+  }
+
 }
