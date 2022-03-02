@@ -23,10 +23,25 @@ export class ImputationComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
-      this.imputationsWeek = await this.imputationsService.LoadImputations();
+      this.imputationsWeek = await this.imputationsService.LoadImputations(parseInt($event.week));
     } catch (error) {
       console.log(error);
     }
   }
+
+
+  //event del Output de  componente calendar Week
+  async getWeek($event: any) {
+
+    console.log('emitido', $event.week);
+    try {
+      this.imputationsWeek = await this.imputationsService.LoadImputations(parseInt($event.week));
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+
 
 }

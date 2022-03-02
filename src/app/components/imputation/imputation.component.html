@@ -1,14 +1,14 @@
 <div class="container">
   <div class="row g-0">
 
-		<div class="col-12 text-center">
-			<h3>{{ user?.name }} {{ user?.surname }}</h3>
-			<h5>{{ user?.role }}</h5>
-			<hr class="my-5">
-		</div>
+    <div class="col-12 text-center">
+      <h3>{{ user?.name }} {{ user?.surname }}</h3>
+      <h5>{{ user?.role }}</h5>
+      <hr class="my-5">
+    </div>
 
     <div class="col-12 mb-5">
-      <app-calendar-week></app-calendar-week>
+      <app-calendar-week (selectWeek)="getWeek($event)"></app-calendar-week>
     </div>
 
     <div class="col-12">

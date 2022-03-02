@@ -25,7 +25,7 @@ export class ImputationTableComponent implements OnInit {
     // }
   }
 
-    OnRegisterImputations(pForm: any) {
+  OnRegisterImputations(pForm: any) {
     for (let key in pForm.value) {
       if (pForm.value[key] != "") {
         let projectId = parseInt(key.split('-')[0]);

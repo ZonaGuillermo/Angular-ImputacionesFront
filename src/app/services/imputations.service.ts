@@ -21,17 +21,17 @@ export class ImputationsService {
       "dayWeek": dayWeek,
       "imputationHours": imputationHours
     }
-    
+
     lastValueFrom(this.httpClient.post<any>(this.baseUrl + 'endpointImputaciones', objImputation));
   }
 
 
-  // async LoadImputations(): Promise<any> {
-  //   return await lastValueFrom(this.httpClient.get(this.baseUrl + 'endpointImputaciones'));
+  // async LoadImputations(pWeek:number): Promise<any> {
+  //   return await lastValueFrom(this.httpClient.get(this.baseUrl + 'endpointImputaciones'+ pWeek));
   // }
 
 
-  LoadImputations(): any[] {
+  LoadImputations(pWeek: number): any[] {
     const imputationsWeek = [
       {
         "project":
