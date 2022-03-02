@@ -1,16 +1,13 @@
 <div class="container ms-auto p-1">
   <p>Fecha: {{dateNow}}</p>
-  <p>Semana: {{weekNow}}</p>
+  <p>Semana actual: {{weekNow}}</p>
 
   <form [formGroup]="weekForm">
     <select formControlName="week">
       <!-- Iterando weeks y hallando su indice -->
       <option *ngFor="let week of weeks; let i = index" [value]="i + 1">Semana {{i +1}}</option>
-
     </select>
-
   </form>
-
 
 </div>
 

@@ -33,6 +33,10 @@ export class CalendarWeekComponent implements OnInit {
       this.selectWeek.emit(value);
     })
 
+
+  // getWeek() {
+  //   this.dateNow
+    //Cuando el value sea igual a weeknow , que muestre weeknow 
   }
 
 }
