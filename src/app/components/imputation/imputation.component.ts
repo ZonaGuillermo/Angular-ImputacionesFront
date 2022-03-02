@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user.interface';
+import { ImputationsService } from 'src/app/services/imputations.service';
 
 @Component({
   selector: 'app-imputation',
@@ -9,13 +10,23 @@ import { User } from 'src/app/interfaces/user.interface';
 export class ImputationComponent implements OnInit {
 
   user: User | null;
+  imputationsWeek: any;
 
-  constructor() {
+
+  constructor(
+    private imputationsService: ImputationsService
+
+  ) {
     this.user = JSON.parse(localStorage.getItem('user')!); // el (!) evita el null
   }
 
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    try {
+      this.imputationsWeek = await this.imputationsService.LoadImputations();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 }

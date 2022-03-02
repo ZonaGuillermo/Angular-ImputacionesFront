@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { ImputationsService } from 'src/app/services/imputations.service';
+
 
 @Component({
   selector: 'app-imputation-table',
@@ -8,21 +9,28 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ImputationTableComponent implements OnInit {
 
-  registerImputations: FormGroup;
+  @Input() imputationsWeek: any;
 
-  constructor() { 
-    this.registerImputations = new FormGroup({});
-  }
+  arrDays: string[] = ['lunes', 'martes', 'miercoles']
 
-  ngOnInit(): void {
+  constructor(
+    private imputationsService: ImputationsService
+  ) { }
+
+  async ngOnInit(): Promise<void> {
+    // try {
+    //   this.imputationsWeek = await this.imputationsService.LoadImputations();
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
 
     OnRegisterImputations(pForm: any) {
     for (let key in pForm.value) {
       if (pForm.value[key] != "") {
-        let idProyecto = parseInt(key.split('-')[0]);
-        let diaSemana = key.split('-')[1];
-        console.log(idProyecto, diaSemana, pForm.value[key]);
+        let projectId = parseInt(key.split('-')[0]);
+        let dayWeek = key.split('-')[1];
+        this.imputationsService.SendImputation(projectId, dayWeek, pForm.value[key]);
       }
     }
   }
