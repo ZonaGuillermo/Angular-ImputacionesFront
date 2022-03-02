@@ -42,7 +42,7 @@ export class ImputationsService {
         },
         "imputations":
         {
-          "monday": 4,
+          "monday": 5,
           "tuesday": 6,
           "wednesday": 2,
           "thursday": 3
