@@ -25,7 +25,6 @@ export class CalendarWeekComponent implements OnInit {
   }
 
 
-
   getWeek() {
     this.dateNow
     //Cuando el value sea igual a weeknow , que muestre weeknow 
