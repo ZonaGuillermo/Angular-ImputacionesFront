@@ -31,7 +31,7 @@ export class ImputationsService {
   // }
 
 
-  LoadImputations(pWeek: number): any[] {
+  LoadImputations(pWeek: string): any[] {
     const imputationsWeek = [
       {
         "project":

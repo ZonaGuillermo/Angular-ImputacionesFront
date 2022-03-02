@@ -18,9 +18,9 @@ export class CalendarWeekComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
 
-    this.weekNow = moment().format('ww')// fecha actual
+    this.weekNow = moment().format('ww')// semana actual
     this.weekForm.controls['week'].setValue(this.weekNow)
-    this.dateNow = moment().format('DD-MM-YY') // semana actual
+    this.dateNow = moment().format('DD-MM-YY') // fecha actual
 
     this.selectWeek = new EventEmitter();
   }
