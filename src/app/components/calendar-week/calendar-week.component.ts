@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-//import * as moment from 'moment'
+import { FormBuilder } from '@angular/forms';
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-calendar-week',
@@ -7,13 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calendar-week.component.css']
 })
 export class CalendarWeekComponent implements OnInit {
+  dateNow: any;
+  weekNow: any;
+  weekForm = this.fb.group({ week: "" })
+  weeks = Array(52);
 
-  constructor() { }
+  constructor(private fb: FormBuilder) {
+    this.weekNow = moment().format('ww')
+    this.weekForm.controls['week'].setValue(this.weekNow)
+    this.dateNow = moment().format('DD-MM-YY')
+
+  }
+
 
   ngOnInit(): void {
   }
 
-  // getWeek() {
 
-  // }
+
+  getWeek() {
+    this.dateNow
+    //Cuando el value sea igual a weeknow , que muestre weeknow 
+  }
 }

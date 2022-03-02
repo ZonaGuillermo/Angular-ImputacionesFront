@@ -1,32 +1,55 @@
 <div class="container ms-auto p-1">
-  <select class="form-select" aria-label="Default select example">
+  <p>Fecha: {{dateNow}}</p>
+  <p>Semana: {{weekNow}}</p>
+  <form [formGroup]="weekForm">
+
+    <select formControlName="week">
+      <option *ngFor="let week of weeks; let i = index" [value]="i">Semana {{i}}</option>
+
+
+    </select>
+
+  </form>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- <select class="form-select" (click)="getWeek()" aria-label="Default select example">
     <option selected>Elige semana</option>
     <option value="1">Semana 1</option>
     <option value="2">Semana 2</option>
     <option value="3">Semana 3</option>
-    <option value="1">Semana 4</option>
-    <option value="2">Semana 5</option>
-    <option value="3">Semana 6</option>
-    <option value="1">Semana 7</option>
-    <option value="2">Semana 8</option>
-    <option value="3">Semana 9</option>
-    <option value="1">Semana 10</option>
-    <option value="2">Semana 11</option>
-    <option value="3">Semana 12</option>
-    <option value="1">Semana 13</option>
-    <option value="2">Semana 14</option>
-    <option value="3">Semana 15</option>
-    <option value="1">Semana 16</option>
-    <option value="2">Semana 17</option>
-    <option value="3">Semana 18</option>
-    <option value="1">Semana 19</option>
-    <option value="2">Semana 20</option>
-    <option value="3">Semana 21</option>
-    <option value="1">Semana 22</option>
-    <option value="2">Semana 23</option>
-    <option value="3">Semana 24</option>
-    <option value="1">Semana 25</option>
-    <option value="2">Semana 26</option>
+    <option value="4">Semana 4</option>
+    <option value="5">Semana 5</option>
+    <option value="6">Semana 6</option>
+    <option value="7">Semana 7</option>
+    <option value="8">Semana 8</option>
+    <option value="9">Semana 9</option>
+    <option value="10">Semana 10</option>
+    <option value="11">Semana 11</option>
+    <option value="12">Semana 12</option>
+    <option value="13">Semana 13</option>
+    <option value="14">Semana 14</option>
+    <option value="15">Semana 15</option>
+    <option value="16">Semana 16</option>
+    <option value="17">Semana 17</option>
+    <option value="18">Semana 18</option>
+    <option value="19">Semana 19</option>
+    <option value="20">Semana 20</option>
+    <option value="21">Semana 21</option>
+    <option value="22">Semana 22</option>
+    <option value="23">Semana 23</option>
+    <option value="24">Semana 24</option>
+    <option value="25">Semana 25</option>
+    <option value="26">Semana 26</option>
     <option value="3">Semana 27</option>
     <option value="1">Semana 28</option>
     <option value="2">Semana 29</option>
@@ -75,5 +98,4 @@
     <option value="3">Semana 52</option>
 
 
-  </select>
-</div>
+  </select> -->
