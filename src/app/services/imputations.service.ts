@@ -13,7 +13,8 @@ export class ImputationsService {
     private httpClient: HttpClient
   ) { }
 
-
+// ENVIAMOS al backend las horas imputadas por cada proyecto y día de la semana.
+// SOLO un proyecto y un día a la vez
   SendImputation(projectId: number, dayWeek: string, imputationHours: number) {
 
     const objImputation = {
@@ -26,11 +27,13 @@ export class ImputationsService {
   }
 
 
-  // async LoadImputations(pWeek:number): Promise<any> {
+  //RECIBIMOS las imputaciones de horas de TODA LA SEMANA actual o la que corresponda
+  // async LoadImputations(pWeek:string): Promise<any> {
   //   return await lastValueFrom(this.httpClient.get(this.baseUrl + 'endpointImputaciones'+ pWeek));
   // }
 
-
+  
+  //RECIBIMOS las imputaciones de horas de TODA LA SEMANA actual o la que corresponda
   LoadImputations(pWeek: string): any[] {
     const imputationsWeek = [
       {
