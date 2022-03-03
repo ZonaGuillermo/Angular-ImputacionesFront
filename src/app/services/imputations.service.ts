@@ -44,7 +44,6 @@ export class ImputationsService {
         {
           "projectId": 111,
           "projectName": "proyecto 11",
-          "calendarId": 2
         },
         "imputations":
         {
