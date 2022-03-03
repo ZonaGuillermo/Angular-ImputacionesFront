@@ -8,10 +8,12 @@
     </div>
 
     <div class="col-12 mb-5">
+      <!-- OUTPUT para enviar la semana seleccionada a imputation.component -->
       <app-calendar-week (selectWeek)="getWeek($event)"></app-calendar-week>
     </div>
 
     <div class="col-12">
+      <!-- INPUT que recibe la semana seleccionada en imputation-table.component -->
       <app-imputation-table [imputationsWeek]="imputationsWeek"></app-imputation-table>
     </div>
 

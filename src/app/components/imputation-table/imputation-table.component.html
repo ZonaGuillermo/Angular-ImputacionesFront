@@ -2,6 +2,7 @@
 	<div class="row">
 		<div class="col-12">
 
+			<!-- Pintamos el formulario con la tabla de las imputaciones -->
 			<form #registerImputations="ngForm" class="m-2 mb-5" (ngSubmit)="OnRegisterImputations(registerImputations)">
 				<table class="table">
 					<thead>
@@ -15,6 +16,8 @@
 						<th>Domingo</th>
 					</thead>
 					<tbody>
+						<!-- Recorremos el array de objetos imputationsWeek, donde están 
+						las imputaciones horarias de la semana, para pintar los proyectos y las horas semanales de cada proyecto -->
 						<tr *ngFor="let item of imputationsWeek">
 							<th>{{ item.project.projectName }}</th>
 							<td>
