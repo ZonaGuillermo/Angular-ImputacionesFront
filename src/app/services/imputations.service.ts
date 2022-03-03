@@ -13,8 +13,11 @@ export class ImputationsService {
     private httpClient: HttpClient
   ) { }
 
-// ENVIAMOS al backend las horas imputadas por cada proyecto y día de la semana.
-// SOLO un proyecto y un día a la vez
+  
+
+
+  // ENVIAMOS al backend las horas imputadas por cada proyecto y día de la semana.
+  // SOLO un proyecto y un día a la vez
   SendImputation(projectId: number, dayWeek: string, imputationHours: number) {
 
     const objImputation = {

@@ -21,25 +21,25 @@
 						<tr *ngFor="let item of imputationsWeek">
 							<th>{{ item.project.projectName }}</th>
 							<td>
-								<input type="number" [name]="item.project.projectId + '-lunes'" min="0" max="9" class="form-control" [(ngModel)]="item.imputations.monday">
+								<input type="number" [name]="item.project.projectId + '-monday'" min="1" max="9" class="form-control" [(ngModel)]="item.imputations.monday">
 							</td>
 							<td>
-								<input type="number" [name]="item.project.projectId + '-martes'" min="0" max="9" class="form-control" [(ngModel)]="item.imputations.tuesday">
+								<input type="number" [name]="item.project.projectId + '-tuesday'" min="1" max="9" class="form-control" [(ngModel)]="item.imputations.tuesday">
 							</td>
 							<td>
-								<input type="number" [name]="item.project.projectId + '-miercoles'" min="0" max="9" class="form-control" [(ngModel)]="item.imputations.wednesday">
+								<input type="number" [name]="item.project.projectId + '-wednesday'" min="1" max="9" class="form-control" [(ngModel)]="item.imputations.wednesday">
 							</td>
 							<td>
-								<input type="number" [name]="item.project.projectId + '-jueves'" min="0" max="9" class="form-control" [(ngModel)]="item.imputations.thursday">
+								<input type="number" [name]="item.project.projectId + '-thursday'" min="1" max="9" class="form-control" [(ngModel)]="item.imputations.thursday">
 							</td>
 							<td>
-								<input type="number" [name]="item.project.projectId + '-viernes'" min="0" max="9" class="form-control" [(ngModel)]="item.imputations.friday">
+								<input type="number" [name]="item.project.projectId + '-friday'" min="1" max="9" class="form-control" [(ngModel)]="item.imputations.friday">
 							</td>
 							<td>
-								<input type="number" [name]="item.project.projectId + '-sabado'" min="0" max="9" class="form-control" [(ngModel)]="item.imputations.saturday">
+								<input type="number" [name]="item.project.projectId + '-saturday'" min="1" max="9" class="form-control" [(ngModel)]="item.imputations.saturday">
 							</td>
 							<td>
-								<input type="number" [name]="item.project.projectId + '-domingo'" min="0" max="9" class="form-control" [(ngModel)]="item.imputations.sunday">
+								<input type="number" [name]="item.project.projectId + '-sunday'" min="1" max="9" class="form-control" [(ngModel)]="item.imputations.sunday">
 							</td>
 						</tr>
 					</tbody>
