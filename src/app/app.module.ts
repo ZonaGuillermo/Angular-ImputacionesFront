@@ -12,6 +12,8 @@ import { ImputationComponent } from './components/imputation/imputation.componen
 import { ImputationTableComponent } from './components/imputation-table/imputation-table.component';
 import { CalendarWeekComponent } from './components/calendar-week/calendar-week.component';
 import { CheckComponent } from './components/check/check.component';
+import { CheckImputationTableComponent } from './components/check-imputation-table/check-imputation-table.component';
+import { CheckProjectComponent } from './components/check-project/check-project.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { CheckComponent } from './components/check/check.component';
     ImputationComponent,
     ImputationTableComponent,
     CalendarWeekComponent,
-    CheckComponent
+    CheckComponent,
+    CheckImputationTableComponent,
+    CheckProjectComponent
   ],
 
   imports: [
