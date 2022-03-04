@@ -39,10 +39,5 @@ export class CheckComponent implements OnInit {
 
   }
 
-  // getProject() {
-
-  // }
-
-
 
 }
