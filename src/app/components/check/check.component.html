@@ -2,10 +2,13 @@
   <div class="row g-0">
 
     <div class="col-12 mb-5">
-      <app-check-project></app-check-project>
+      <!--OUTPUT para enviar los proyectos seleccionados a check.component -->
+      <app-check-project (selectProject)="getProject($event)"></app-check-project>
     </div>
 
     <div class="col-12">
+
+      <!-- INPUT -->
       <app-check-imputation-table></app-check-imputation-table>
     </div>
 

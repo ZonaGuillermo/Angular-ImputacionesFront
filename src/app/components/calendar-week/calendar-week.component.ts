@@ -9,7 +9,7 @@ import * as moment from 'moment'
 })
 export class CalendarWeekComponent implements OnInit {
 
-  //creacion output: hijo a padre
+  //creacion output: hijo a padre(portal imputation)
   @Output() selectWeek: EventEmitter<any>
 
   dateNow: any; // Para mostrar la fecha actual
@@ -24,10 +24,10 @@ export class CalendarWeekComponent implements OnInit {
 
     this.selectWeek = new EventEmitter();
   }
-  
-  
+
+
   ngOnInit(): void {
-    //Subscripcion a los carmbios del formulario de semanas
+    //Subscripcion a los cambios del formulario de semanas
     this.weekForm.valueChanges.subscribe((value) => {
       //console.log('cambios:', value)
       // Emitimos el output al componente padre (imputations.component)
