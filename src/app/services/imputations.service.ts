@@ -22,8 +22,11 @@ export class ImputationsService {
 
     const objImputation = {
       "projectId": projectId,
-      "dayWeek": dayWeek,
-      "imputationHours": imputationHours
+      "dayWeek": dayWeek, //day: number
+      "imputationHours": imputationHours //hours
+      //"extra_hours": null
+      //"Employee_id": sacalo del localStorage "user"
+      //"week": sácalo del componente week(input)
     }
 
     lastValueFrom(this.httpClient.post<any>(this.baseUrl + 'endpointImputaciones', objImputation));
@@ -40,47 +43,83 @@ export class ImputationsService {
   LoadImputations(pWeek: string): any[] {
     const imputationsWeek = [
       {
-        "project":
-        {
-          "projectId": 111,
-          "projectName": "proyecto 11",
-        },
-        "imputations":
-        {
-          "monday": 5,
-          "tuesday": 6,
-          "wednesday": 2,
-          "thursday": 3
-        }
+        "projectName": "Proyecto 1",
+        "projectId": 1,
+        "imputations": [
+          {
+            "imputation_Id": 26,
+            "day": 1,
+            "hours": 3,
+            "state": "sent",
+            "extra_Hours": 0,
+            "week": 3,
+            "message": null,
+            "status": null
+          },
+          {
+            "imputation_Id": 4,
+            "day": 2,
+            "hours": 3,
+            "state": "sent",
+            "extra_Hours": 0,
+            "week": 3,
+            "message": null,
+            "status": null
+          }
+        ]
       },
       {
-        "project":
-        {
-          "projectId": 222,
-          "projectName": "proyecto 22"
-        },
-        "imputations":
-        {
-          "monday": 3,
-          "tuesday": 4,
-          "wednesday": 6,
-          "thursday": 2,
-          "friday": 1
-        }
+        "projectName": "Proyecto 2",
+        "projectId": 2,
+        "imputations": [
+          {
+            "imputation_Id": 3,
+            "day": 1,
+            "hours": 4,
+            "state": "sent",
+            "extra_Hours": 0,
+            "week": 3,
+            "message": null,
+            "status": null
+          },
+          {
+            "imputation_Id": 24,
+            "day": 4,
+            "hours": 5,
+            "state": "sent",
+            "extra_Hours": 0,
+            "week": 3,
+            "message": null,
+            "status": null
+          }
+        ]
       },
       {
-        "project":
-        {
-          "projectId": 333,
-          "projectName": "proyecto 33"
-        },
-        "imputations":
-        {
-          "monday": 2,
-          "tuesday": 5,
-          "thursday": 1
-        }
-      },
+        "projectName": "Proyecto 3",
+        "projectId": 3,
+        "imputations": [
+          {
+            "imputation_Id": 23,
+            "day": 3,
+            "hours": 3,
+            "state": "sent",
+            "extra_Hours": 0,
+            "week": 3,
+            "message": null,
+            "status": null
+          },
+          {
+            "imputation_Id": 25,
+            "day": 5,
+            "hours": 4,
+            "state": "sent",
+            "extra_Hours": 0,
+            "week": 3,
+            "message": null,
+            "status": null
+          }
+        ]
+      }
     ]
 
     return imputationsWeek;

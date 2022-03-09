@@ -41,10 +41,10 @@ export class ImputationComponent implements OnInit {
   }
 
 
-  // Event del Output del componente calendar Week para emitir la semana que seleccionemos.
+  // Event del Output del componente calendar-Week para emitir la semana que seleccionemos.
   async getWeek($event: any) {
 
-    console.log('emitido', $event.week);
+    // console.log('emitido', $event.week);
     try {
       this.imputationsWeek = await this.imputationsService.LoadImputations($event.week);
     } catch (error) {

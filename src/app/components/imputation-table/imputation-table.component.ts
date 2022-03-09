@@ -11,9 +11,9 @@ import { UsersService } from 'src/app/services/users.service';
 export class ImputationTableComponent implements OnInit {
 
   // Input de padre a hijo
-  @Input() imputationsWeek: any;
+  @Input() imputationsWeek: any; // Solo se usa para pintar con ngFor en el HTML
 
-  arrWeekDays: string[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+  arrWeekDays: string[] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']; // Se usa en minimunDailyHours()
 
   minimunDailyWorkHours: number = this.usersService.GetMinimunDailyHoursByUser();
 
@@ -37,6 +37,7 @@ export class ImputationTableComponent implements OnInit {
     this.MinimunDailyHours(pForm);
 
     // Recorremos el objeto que se forma en el formulario al guardar
+    // la key es el valor del atributo name del formulario: projectId-día
     for (let key in pForm.value) {
       if (pForm.value[key] != "") {
         // Partimos la key para separar el id del proyecto del día de la semana

@@ -8,19 +8,19 @@
         <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm)">
 
           <div class="form-group py-2">
-            <input type="text" class="form-control" id="user" placeholder="Usuario" formControlName="username" required>
-            <p *ngIf="checkControl('username', 'required')" class="text-danger">Campo requerido</p>
+            <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email" required>
+            <p *ngIf="checkControl('email', 'required')" class="text-danger">Campo requerido</p>
           </div>
 
           <div class="form-group">
-            <input type="password" class="form-control" id="password" placeholder="Password" FormcontrolName="password"
+            <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password"
               required>
             <p *ngIf="checkControl('password', 'required')" class="text-danger">Campo requerido</p>
             <p *ngIf="checkControl('password', 'minlength')" class="text-danger">El password tiene que tener longitud minima de 8 caractéres</p>
           </div>
 
           <br>
-          <button type="submit" class="form-control btn btn-lg btn-block " [routerLink]="['/imputation']">Sign
+          <button type="submit" class="form-control btn btn-lg btn-block ">Sign
             in</button>
         </form>
 

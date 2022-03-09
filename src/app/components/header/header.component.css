@@ -1,7 +1,10 @@
-.navbar{
-  border-top: 2em solid rgba(218, 221, 2, 1);
+.navbar {
+  /* border-top: 2em solid rgba(218, 221, 2, 1); */
+  background-color: #020726;
 }
 
-.nav-link {
-  color: fff;
+.navbar-toggler,
+.navbar-toggler:focus {
+  border: 0;
+  box-shadow: none;
 }
