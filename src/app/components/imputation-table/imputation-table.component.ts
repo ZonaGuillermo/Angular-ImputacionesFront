@@ -32,6 +32,8 @@ export class ImputationTableComponent implements OnInit {
 
   // Enviamos las imputationces semanales al backend
   OnRegisterImputations(pForm: any) {
+
+    console.log(this.imputationsWeek);
     // Comprobamos que todos los días cumplen con el mínimo de horas diárias
     // según el calendario del empleado.
     this.MinimunDailyHours(pForm);
