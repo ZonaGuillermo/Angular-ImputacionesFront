@@ -7,168 +7,106 @@ import { lastValueFrom } from 'rxjs';
 })
 export class ImputationsService {
 
-  baseUrl: string = 'http://localhost:3000/api/'
+  baseUrl: string = 'https://localhost:7091/api/'
 
   constructor(
     private httpClient: HttpClient
   ) { }
 
   
+  SendImputation(imputationsWeek: any[]) {
+    const employee = JSON.parse(localStorage.getItem('employee')!);
 
+    let result = new Array();
+    result = JSON.parse(JSON.stringify(imputationsWeek));
 
-  // ENVIAMOS al backend las horas imputadas por cada proyecto y día de la semana.
-  // SOLO un proyecto y un día a la vez
-  SendImputation(projectId: number, dayWeek: string, imputationHours: number) {
+    result.forEach(project => {
+      project.employeeId = employee.employee_Id;
 
-    const objImputation = {
-      "projectId": projectId,
-      "dayWeek": dayWeek, //day: number
-      "imputationHours": imputationHours //hours
-      //"extra_hours": null
-      //"Employee_id": sacalo del localStorage "user"
-      //"week": sácalo del componente week(input)
-    }
+      project.imputations = project.imputations.filter((imputation: { hours: string; }) => {
+        return imputation.hours !== '';
+      });
 
-    lastValueFrom(this.httpClient.post<any>(this.baseUrl + 'endpointImputaciones', objImputation));
+      project.imputations.map((imputation: { state: string; }) => {
+        if (imputation.state === '') {
+          imputation.state = 'sent';
+        }
+      });
+    });
+
+    console.log('result', result);
+
+    //   lastValueFrom(this.httpClient.post<any>(this.baseUrl + 'endpointImputaciones', result));
   }
 
 
   //RECIBIMOS las imputaciones de horas de TODA LA SEMANA actual o la que corresponda
-  // async LoadImputations(pWeek:string): Promise<any> {
-  //   return await lastValueFrom(this.httpClient.get(this.baseUrl + 'endpointImputaciones'+ pWeek));
-  // }
+  async LoadImputations(pWeek: string): Promise<any> {
+    const employee = JSON.parse(localStorage.getItem('employee')!);
+		const weekAndEmployeeId = { "week": pWeek, "employee_Id": employee.employee_Id };
+    // const weekAndEmployeeId = { "week": pWeek, "employee_Id": 2 };
+		// console.log(weekAndEmployeeId);
+    const imputationsWeek = await lastValueFrom(this.httpClient.post(this.baseUrl + 'Imputation/GetImputationsByEmployeeByWeek', weekAndEmployeeId));
 
-  
-  //RECIBIMOS las imputaciones de horas de TODA LA SEMANA actual o la que corresponda
-  LoadImputations(pWeek: string): any[] {
-    const imputationsWeek = [
-      {
-        "projectName": "Proyecto 1",
-        "projectId": 1,
-        "imputations": [
-          {
-            "imputation_Id": 26,
-            "day": 1,
-            "hours": 3,
-            "state": "sent",
-            "extra_Hours": 0,
-            "week": 3,
-            "message": null,
-            "status": null
-          },
-          {
-            "imputation_Id": 4,
-            "day": 2,
-            "hours": 3,
-            "state": "sent",
-            "extra_Hours": 0,
-            "week": 3,
-            "message": null,
-            "status": null
-          }
-        ]
-      },
-      {
-        "projectName": "Proyecto 2",
-        "projectId": 2,
-        "imputations": [
-          {
-            "imputation_Id": 3,
-            "day": 1,
-            "hours": 4,
-            "state": "sent",
-            "extra_Hours": 0,
-            "week": 3,
-            "message": null,
-            "status": null
-          },
-          {
-            "imputation_Id": 24,
-            "day": 4,
-            "hours": 5,
-            "state": "sent",
-            "extra_Hours": 0,
-            "week": 3,
-            "message": null,
-            "status": null
-          }
-        ]
-      },
-      {
-        "projectName": "Proyecto 3",
-        "projectId": 3,
-        "imputations": [
-          {
-            "imputation_Id": 23,
-            "day": 3,
-            "hours": 3,
-            "state": "sent",
-            "extra_Hours": 0,
-            "week": 3,
-            "message": null,
-            "status": null
-          },
-          {
-            "imputation_Id": 25,
-            "day": 5,
-            "hours": 4,
-            "state": "sent",
-            "extra_Hours": 0,
-            "week": 3,
-            "message": null,
-            "status": null
-          }
-        ]
-      }
-    ]
+    // Convierto el objeto que devuelve el back en un array para usar el map()
+    const arrImputationsWeek = Object.values(imputationsWeek);
+    
+    if (arrImputationsWeek.length == 0) {
+      return { "message": "No hay proyectos en esta semana" };
+    }
 
-    return imputationsWeek.map((project)=>{
+    return arrImputationsWeek.map((project: any) => {
 
-      const imputationsTemp:any[] = new Array(7);
-      for(let i = 0; i < 7; i++){
+      const imputationsTemp: any[] = new Array(7);
+      
+      for (let i = 0; i < 7; i++) {
         const imputationExistente = project.imputations
-        .find((imputation)=>{
-            return (i+1) === imputation.day
+          .find((imputation: any) => {
+            return (i + 1) === imputation.day
           })
 
-          if(imputationExistente){
-            imputationsTemp[i] = imputationExistente;
-          }else{
-            imputationsTemp[i] = {
-                "day": i+1,
-                "hours": "",
-                "state": "",
-                "extra_Hours": 0,
-                "week": pWeek,
-                "message": null,
-                "status": null
-            }
+        if (imputationExistente) {
+          imputationExistente.week = parseInt(pWeek);
+          imputationsTemp[i] = imputationExistente;
+        } else {
+          imputationsTemp[i] = {
+            "day": i + 1,
+            "hours": "",
+            "state": "",
+            "extra_Hours": 0,
+            "week": parseInt(pWeek),
+            "message": null,
+            "status": null
           }
+        }
 
       }
       project.imputations = imputationsTemp;
       return project;
-      // project.imputations = project.imputations.map((imputation)=>{
-
-      //   return imputation;
-      // })
     });
+
   }
 }
-//  {
+
+
+  
+  //RECIBIMOS las imputaciones de horas de TODA LA SEMANA actual o la que corresponda
+//   LoadImputations(pWeek: string): any[] {
+//     const imputationsWeek = [
+//       {
 //         "projectName": "Proyecto 1",
 //         "projectId": 1,
 //         "imputations": [
-          // {
-          //   "imputation_Id": 26,
-          //   "day": 1,
-          //   "hours": 3,
-          //   "state": "sent",
-          //   "extra_Hours": 0,
-          //   "week": 3,
-          //   "message": null,
-          //   "status": null
-          // },
+//           {
+//             "imputation_Id": 26,
+//             "day": 1,
+//             "hours": 3,
+//             "state": "sent",
+//             "extra_Hours": 0,
+//             "week": 3,
+//             "message": null,
+//             "status": null
+//           },
 //           {
 //             "imputation_Id": 4,
 //             "day": 2,
@@ -181,3 +119,93 @@ export class ImputationsService {
 //           }
 //         ]
 //       },
+//       {
+//         "projectName": "Proyecto 2",
+//         "projectId": 2,
+//         "imputations": [
+//           {
+//             "imputation_Id": 3,
+//             "day": 1,
+//             "hours": 4,
+//             "state": "sent",
+//             "extra_Hours": 0,
+//             "week": 3,
+//             "message": null,
+//             "status": null
+//           },
+//           {
+//             "imputation_Id": 24,
+//             "day": 4,
+//             "hours": 5,
+//             "state": "sent",
+//             "extra_Hours": 0,
+//             "week": 3,
+//             "message": null,
+//             "status": null
+//           }
+//         ]
+//       },
+//       {
+//         "projectName": "Proyecto 3",
+//         "projectId": 3,
+//         "imputations": [
+//           {
+//             "imputation_Id": 23,
+//             "day": 3,
+//             "hours": 3,
+//             "state": "sent",
+//             "extra_Hours": 0,
+//             "week": 3,
+//             "message": null,
+//             "status": null
+//           },
+//           {
+//             "imputation_Id": 25,
+//             "day": 5,
+//             "hours": 4,
+//             "state": "sent",
+//             "extra_Hours": 0,
+//             "week": 3,
+//             "message": null,
+//             "status": null
+//           }
+//         ]
+//       },
+//       {
+//         "projectName": "Proyecto 4",
+//         "projectId": 4,
+//         "imputations": []
+//       }    
+//     ]
+
+//     return imputationsWeek.map((project)=>{
+
+//       const imputationsTemp: any[] = new Array(7);
+      
+//       for(let i = 0; i < 7; i++){
+//         const imputationExistente = project.imputations
+//         .find((imputation)=>{
+//             return (i+1) === imputation.day
+//           })
+
+//         if (imputationExistente) {
+//           imputationExistente.week = parseInt(pWeek);
+//             imputationsTemp[i] = imputationExistente;
+//           }else{
+//             imputationsTemp[i] = {
+//                 "day": i+1,
+//                 "hours": "",
+//                 "state": "",
+//                 "extra_Hours": 0,
+//                 "week": parseInt(pWeek),
+//                 "message": null,
+//                 "status": null
+//             }
+//           }
+
+//       }
+//       project.imputations = imputationsTemp;
+//       return project;
+//     });
+//   }
+// }

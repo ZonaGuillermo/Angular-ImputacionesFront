@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsersService } from 'src/app/services/users.service';
+import { EmployeesService } from 'src/app/services/employees.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   
   constructor(
-    private usersService: UsersService,
+    private employeesService: EmployeesService,
     private router: Router
   ) {
 
@@ -33,11 +33,10 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(pForm: any) {
-    this.usersService.Login(pForm.value).subscribe((response)=> {
-      console.log('Respuesta Login', response);
+    this.employeesService.Login(pForm.value).subscribe((response)=> {
       if (response?.token) {
         localStorage.setItem('token', response.token);
-        localStorage.setItem('user', JSON.stringify(response));
+        localStorage.setItem('employee', JSON.stringify(response));
         this.router.navigate(['imputation']);
       } else {
         alert(response?.error)

@@ -11,14 +11,14 @@ export class LoginGuard implements CanActivate {
 
   canActivate(): boolean{
     // this.router.navigate(['/login']);
-    return true;
+    // return true;
 
-    // if (localStorage.getItem('token') !== null) {
-    //   return true;
-    // } else {
-    //   this.router.navigate(['/login']);
-    //   return false;
-    // }
+    if (localStorage.getItem('employee') !== null) {
+      return true;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
+    }
   }
   
 }
