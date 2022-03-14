@@ -28,9 +28,9 @@ export class CalendarWeekComponent implements OnInit {
 
   ngOnInit(): void {
     //Subscripcion a los cambios del formulario de semanas
+    // Emitimos el output al componente padre (imputations.component)
     this.weekForm.valueChanges.subscribe((value) => {
-      //console.log('cambios:', value)
-      // Emitimos el output al componente padre (imputations.component)
+      // console.log('cambios:', value)
       this.selectWeek.emit(value);
     })
   }

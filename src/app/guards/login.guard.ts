@@ -2,23 +2,20 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class LoginGuard implements CanActivate {
-  constructor(
-    private router: Router
-  ) {}
+	constructor(
+		private router: Router
+	) {}
 
-  canActivate(): boolean{
-    // this.router.navigate(['/login']);
-    // return true;
-
-    if (localStorage.getItem('employee') !== null) {
-      return true;
-    } else {
-      this.router.navigate(['/login']);
-      return false;
-    }
-  }
-  
+	canActivate(): boolean{
+		if (localStorage.getItem('employee') !== null) {
+			return true;
+		} else {
+			this.router.navigate(['/login']);
+			return false;
+		}
+	}
+	
 }

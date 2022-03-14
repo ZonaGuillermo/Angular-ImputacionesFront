@@ -12,8 +12,8 @@
         <li *ngIf="login" class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/imputation']">Imputaciones</a>
         </li>
-        <li *ngIf="login" class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/check']">Aprobar</a>
+        <li *ngIf="reviewer" class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/check']">Revisar</a>
         </li>
         <li *ngIf="!login" class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/login']">Login</a>

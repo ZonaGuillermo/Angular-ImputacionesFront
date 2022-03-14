@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   login: boolean = false;
+  reviewer: boolean = false;
 
   constructor(
     private router: Router
@@ -18,7 +19,13 @@ export class HeaderComponent implements OnInit {
   }
 
   ngDoCheck(){
-    this.login = (localStorage.getItem('token') !== null)? true : false;
+    this.login = (localStorage.getItem('token') !== null) ? true : false;
+    this.reviewer = false;
+    
+    if (localStorage.getItem('employee')) {
+      const employee = JSON.parse(localStorage.getItem('employee')!);
+      this.reviewer = (employee.reviewer.length !== 0) ? true : false;
+    }
   }
 
   exitSession() {

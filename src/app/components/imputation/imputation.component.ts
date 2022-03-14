@@ -12,8 +12,6 @@ export class ImputationComponent implements OnInit {
 
   employee: Employee | null;
   imputationsWeek: any; // Carga las imputaciones de TODA LA SEMANA que corresponda
-  currentWeek: string = "";
-
 
   constructor(
     private imputationsService: ImputationsService
@@ -29,10 +27,10 @@ export class ImputationComponent implements OnInit {
   // Cuando carga el componente tengo que detectar en q semana estoy y currentWeek tendra que almacenar el valor de la semana.
   // Averiguamos cual es la semana actual para pasarselo a LoadImputations
   async ngOnInit(): Promise<void> {
-    this.currentWeek = moment().format('ww');
+    const currentWeek = moment().format('ww');
 
     try {
-      this.imputationsWeek = await this.imputationsService.LoadImputations(this.currentWeek);
+      this.imputationsWeek = await this.imputationsService.LoadImputations(currentWeek);
     } catch (error) {
       console.log(error);
     }
