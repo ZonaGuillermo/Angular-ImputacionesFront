@@ -61,6 +61,7 @@ export class ImputationsService {
       const imputationsTemp: any[] = new Array(7);
       
       for (let i = 0; i < 7; i++) {
+        const date = moment().day("Monday").week(parseInt(pWeek)).add(i, 'day').format('DD-MM-YYYY');
         const imputationExistente = project.imputations
           .find((imputation: any) => {
             return (i + 1) === imputation.day
@@ -68,13 +69,13 @@ export class ImputationsService {
 
         if (imputationExistente) {
           imputationExistente.week = parseInt(pWeek);
-          imputationExistente.date = moment().week(parseInt(pWeek)).add(i, 'day').format('DD-MM-YYYY');
+          imputationExistente.date = date;
           imputationsTemp[i] = imputationExistente;
         } else {
           imputationsTemp[i] = {
             "day": i + 1,
             "hours": "",
-            "date": moment().week(parseInt(pWeek)).add(i, 'day').format('DD-MM-YYYY'),
+            "date": date,
             "state": "",
             "extra_Hours": 0,
             "week": parseInt(pWeek),
