@@ -30,6 +30,7 @@
 										<th class="nombreProyecto">{{ item.projectName }}</th>
 
 										<td *ngFor="let imputation of item.imputations">
+											<!-- <input type="hidden" [(ngModel)]="imputation.date" [ngModelOptions]="{standalone: true}"> -->
 											<input type="number" min="1" max="24" class="form-control" [value]="imputation.hours" [(ngModel)]="imputation.hours" [ngModelOptions]="{standalone: true}">
 										</td>
 									</tr>

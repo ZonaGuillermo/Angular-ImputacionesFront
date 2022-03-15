@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
+import * as moment from 'moment'
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,7 @@ export class ImputationsService {
 
     const imputationsWeek = await lastValueFrom(this.httpClient.post(this.baseUrl + 'Imputation/GetImputationsByEmployeeByWeek', weekAndEmployeeId));
 
-    console.log(imputationsWeek);
+    // console.log(imputationsWeek);
     // Convierto el objeto que devuelve el back en un array para usar el map()
     const arrImputationsWeek = Object.values(imputationsWeek);
     
@@ -67,11 +68,13 @@ export class ImputationsService {
 
         if (imputationExistente) {
           imputationExistente.week = parseInt(pWeek);
+          imputationExistente.date = moment().week(parseInt(pWeek)).add(i, 'day').format('DD-MM-YYYY');
           imputationsTemp[i] = imputationExistente;
         } else {
           imputationsTemp[i] = {
             "day": i + 1,
             "hours": "",
+            "date": moment().week(parseInt(pWeek)).add(i, 'day').format('DD-MM-YYYY'),
             "state": "",
             "extra_Hours": 0,
             "week": parseInt(pWeek),

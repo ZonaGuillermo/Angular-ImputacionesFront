@@ -26,8 +26,12 @@ export class ImputationComponent implements OnInit {
   
   // Cuando carga el componente tengo que detectar en q semana estoy y currentWeek tendra que almacenar el valor de la semana.
   // Averiguamos cual es la semana actual para pasarselo a LoadImputations
-  async ngOnInit(): Promise<void> {
+  async ngOnInit() {
     const currentWeek = moment().format('ww');
+    const fecha = moment().week(parseInt(currentWeek)).format('DD-MM-YYYY');
+    const fechaSemana = moment().week(2).add(2, 'day').format('DD-MM-YYYY');
+    console.log('fecha', fecha);
+    console.log('fecha', fechaSemana);
 
     try {
       this.imputationsWeek = await this.imputationsService.LoadImputations(currentWeek);
