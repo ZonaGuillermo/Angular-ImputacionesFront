@@ -1,11 +1,15 @@
-<div class="container ms-auto p-1">
+<div class="container ms-auto text-center">
 
-  <form [formGroup]="projectForm">
-    <select formControlName="project">
-      <!-- Pintamos los proyectos en las opciones del selector -->
-      <!-- Iterando projects y hallando su indice -->
-      <option *ngFor="let project of projects; let i = index" [value]="i + 1">Proyectos {{i + 1}}</option>
-    </select>
+  <form [formGroup]="projectForm" class="d-flex justify-content-center">
+    <div>
+      <h5 class="mb-3">Escoge un projecto</h5>
+      <select class="form-select" formControlName="project">
+        <option *ngFor="let project of projects" [value]="project.project_Id">{{ project.projectName }}</option>
+      </select>
+    </div>
   </form>
 
+  <hr class="my-5">
+
+  <h3 class="pt-4 mb-4">{{ projectName }}</h3>
 </div>

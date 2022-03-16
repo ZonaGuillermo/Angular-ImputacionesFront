@@ -8,27 +8,37 @@ import { FormBuilder } from '@angular/forms';
 })
 export class CheckProjectComponent implements OnInit {
 
-  //Creacion Output : hijo a padre ( portal check)
-  @Output() selectProject: EventEmitter<any>
-
+  //Creacion Output : hijo a padre (portal check)
+  @Output() projectSelected: EventEmitter<any>;
   projectForm = this.fb.group({ project: "" })// formGroup
-  projects = Array(15); // Numero de proyectos
+  projects = JSON.parse(localStorage.getItem('employee')!).reviewer;
+  projectName: string = '';
 
+  // Rellenamos el select con los valores de reviewer del localStorage
   constructor(private fb: FormBuilder) {
-    this.projectForm.controls['project'].setValue(this.projects)//*pendiente llenar setValue
-
-    this.selectProject = new EventEmitter();
+    this.projectForm.controls['project'].setValue(this.projects[0].project_Id);
+    this.projectName = this.projects[0].projectName;
+    this.projectSelected = new EventEmitter();
   }
-
-  ngOnInit(): void {
+  
+  ngOnInit(): void { 
+    
+    this.projectSelected.emit(this.projects[0].project_Id);
+    // console.log('projects', this.projects);
 
     // Subscripcion a los cambios del formulario de proyectos
+    this.projectForm.controls['project'].valueChanges.subscribe((value) => {
+      
+      this.projectName = this.projects.find((project: any) => 
+        project.project_Id == value
+      ).projectName;
 
-    this.projectForm.valueChanges.subscribe((value) => {
-      //console.log('cambios', value);
-      this.selectProject.emit(value)
-    })
+      // console.log('value', value);
+      
+      this.projectSelected.emit(value);
 
+    });
   }
+
 
 }

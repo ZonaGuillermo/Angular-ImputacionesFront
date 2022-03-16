@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectsService } from 'src/app/services/projects.service';
+import { ChecksService } from 'src/app/services/checks.service';
 
 @Component({
   selector: 'app-check',
@@ -11,13 +11,8 @@ export class CheckComponent implements OnInit {
   currentProject: any;
 
   constructor(
-    private projectsService: ProjectsService) {
-    this.currentProject = {
-
-      name: "javier",
-      horas: 2,
-      fecha: "04-03-2022"
-    }
+    private checksService: ChecksService
+  ) {
   }
 
   ngOnInit(): void {
@@ -28,14 +23,14 @@ export class CheckComponent implements OnInit {
   // Evento del Output del componente Check-project para emitir los proyectos que seleccionemos
   //*Revisar
 
-  async getProject($event: any) {
-    console.log('emitido', $event.project);
-    try {
-      this.currentProject = await this.projectsService.showProject($event.project);
-    } catch (error) {
-      console.log(error);
-    }
+  async getProjectSelected($event: any) {
+    // console.log('emitido', $event);
 
+    // Aquí la consulta al servicio para recoger las imputaciones por proyecto
+    // this.currentProject = "Aquí va el objeto id=" + $event;
+    this.currentProject = await this.checksService.LoadReviewByProjectId($event);
+
+    console.log('currentProject', this.currentProject);
 
   }
 
