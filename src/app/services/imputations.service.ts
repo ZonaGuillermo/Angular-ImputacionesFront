@@ -28,16 +28,21 @@ export class ImputationsService {
         return imputation.hours !== '' && imputation.hours !== null;
       });
 
-      project.imputations.map((imputation: { state: string; }) => {
-        if (imputation.state === '') {
-          imputation.state = 'sent';
+      project.imputations.map((imputation: { state: number; imputation_Id: number }) => {
+        if (!imputation.imputation_Id) {
+          imputation.imputation_Id = 0;
+        }
+
+        // Si es estado es nulo o 'rechazado' se cambia a 'enviado'
+        if (imputation.state === null || imputation.state === 3) {
+          imputation.state = 1;
         }
       });
     });
 
-    console.log('result', result);
+    // console.log('result', result);
 
-    //   lastValueFrom(this.httpClient.post<any>(this.baseUrl + 'endpointImputaciones', result));
+      return lastValueFrom(this.httpClient.post<any>(this.baseUrl + 'Imputation/ImputationPost', result));
   }
 
 
@@ -61,7 +66,7 @@ export class ImputationsService {
       const imputationsTemp: any[] = new Array(7);
       
       for (let i = 0; i < 7; i++) {
-        const date = moment().day("Monday").week(parseInt(pWeek)).add(i, 'day').format('DD-MM-YYYY');
+        const date = moment().day("Monday").week(parseInt(pWeek)).add(i, 'day').format('YYYY-MM-DD');
         const imputationExistente = project.imputations
           .find((imputation: any) => {
             return (i + 1) === imputation.day
@@ -74,9 +79,9 @@ export class ImputationsService {
         } else {
           imputationsTemp[i] = {
             "day": i + 1,
-            "hours": "",
+            "hours": '',
             "date": date,
-            "state": "",
+            "state": null,
             "extra_Hours": 0,
             "week": parseInt(pWeek),
             "message": null,

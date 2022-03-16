@@ -12,6 +12,7 @@ export class ImputationComponent implements OnInit {
 
   employee: Employee | null;
   imputationsWeek: any; // Carga las imputaciones de TODA LA SEMANA que corresponda
+  week: any;
 
   constructor(
     private imputationsService: ImputationsService
@@ -28,10 +29,10 @@ export class ImputationComponent implements OnInit {
   // Averiguamos cual es la semana actual para pasarselo a LoadImputations
   async ngOnInit() {
     const currentWeek = moment().format('ww');
-    const fecha = moment().week(parseInt(currentWeek)).format('DD-MM-YYYY');
-    const fechaSemana = moment().week(2).add(2, 'day').format('DD-MM-YYYY');
-    console.log('fecha', fecha);
-    console.log('fecha', fechaSemana);
+    // const fecha = moment().week(parseInt(currentWeek)).format('DD-MM-YYYY');
+    // const fechaSemana = moment().week(2).add(2, 'day').format('DD-MM-YYYY');
+    // console.log('fecha', fecha);
+    // console.log('fecha', fechaSemana);
 
     try {
       this.imputationsWeek = await this.imputationsService.LoadImputations(currentWeek);
@@ -43,8 +44,9 @@ export class ImputationComponent implements OnInit {
 
   // Event del Output del componente calendar-Week para emitir la semana que seleccionemos.
   async getWeek($event: any) {
+    console.log('emitido', $event.week);
 
-    // console.log('emitido', $event.week);
+    this.week = $event.week;
     try {
       this.imputationsWeek = await this.imputationsService.LoadImputations($event.week);
     } catch (error) {
@@ -54,5 +56,11 @@ export class ImputationComponent implements OnInit {
   }
 
 
+  async recharge($event: string) {
+    if ($event === 'ok') {
+      this.imputationsWeek = await this.imputationsService.LoadImputations(this.week);
+
+    }
+  }
 
 }

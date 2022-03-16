@@ -14,7 +14,7 @@
 
     <div class="col-12">
       <!-- INPUT que recibe la semana seleccionada en imputation-table.component -->
-      <app-imputation-table [imputationsWeek]="imputationsWeek"></app-imputation-table>
+      <app-imputation-table [imputationsWeek]="imputationsWeek" (datosGuardados)="recharge($event)"></app-imputation-table>
     </div>
 
   </div>

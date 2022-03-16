@@ -7,3 +7,11 @@ input {
 	/* min-width: 20em; */
 	font-size: 0.9em;
 }
+
+.underMinimun {
+	background-color: #ff9999;
+}
+
+.overMinimun {
+	background-color: transparent;
+}

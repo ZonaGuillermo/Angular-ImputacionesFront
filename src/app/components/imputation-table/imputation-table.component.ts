@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChange } from '@angular/core';
 import { ImputationsService } from 'src/app/services/imputations.service';
+import * as moment from 'moment'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-imputation-table',
@@ -10,35 +12,51 @@ export class ImputationTableComponent implements OnInit {
 
   // Input de padre a hijo
   @Input() imputationsWeek: any;
+  @Output() datosGuardados: EventEmitter<any>;
+  arrWeekDays: string[];
+  minimunDailyWorkHours: number;
+  sumDailyWorker: any[];
+  currentDate = moment().format('YYYY-MM-DD');
+
 
   constructor(
     private imputationsService: ImputationsService,
-  ) { }
-
-  async ngOnInit() {
+    private router: Router
+  ) { 
+    const employee = JSON.parse(localStorage.getItem('employee')!);
+    this.minimunDailyWorkHours = employee.calendar.daily_Hours;
+    this.arrWeekDays = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+    this.sumDailyWorker = new Array(7);
+    this.datosGuardados = new EventEmitter();
   }
 
-  // Enviamos las imputationces semanales al backend
-  OnRegisterImputations() {
-    // Comprobamos que todos los días cumplen con el mínimo de horas diárias
-    // según el calendario del empleado.
-		const result: any = this.MinimunDailyHours();
-		
-		if (!result.passMinimunHours) {
-			this.imputationsService.SendImputation(this.imputationsWeek);
-		} else {
-    	const arrWeekDays = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+  async ngOnInit() {
+    // console.log(this.currentDate);
+  }
 
-			alert(`El ${arrWeekDays[result.day]} no supera el mínimo de horas de la jornada`);
-		}
+
+
+  // Enviamos las imputationces semanales al backend
+  // Comprobamos que todos los días cumplen con el mínimo de horas diárias
+  // según el calendario del empleado.
+  async OnRegisterImputations() {
+		const result: any = this.MinimunDailyHours();
+    this.sumDailyWorker = result.sumDailyWorker;
+		
+    if (result.passMinimunHours) {
+      const response = await this.imputationsService.SendImputation(this.imputationsWeek);
+      
+      if (response) {
+        this.datosGuardados.emit('ok');
+      }
+    }
+
+
   }
 
 
   MinimunDailyHours() {
-    const employee = JSON.parse(localStorage.getItem('employee')!);
-		const minimunDailyWorkHours = employee.calendar.daily_Hours;
-		
-		const sumDailyWorker: number[] = new Array(0, 0, 0, 0, 0, 0, 0);
+    const sumDailyWorker: number[] = new Array(0, 0, 0, 0, 0, 0, 0);
 		
 		this.imputationsWeek.forEach((project: { imputations: any[]; }) => {
 			project.imputations.forEach((imputation, index: number) => {
@@ -48,13 +66,12 @@ export class ImputationTableComponent implements OnInit {
 			});
 		});
 
-		let day = 0;
-		const passMinimunHours = sumDailyWorker.some(elem => {
-			day++;
-			return elem < minimunDailyWorkHours && elem !== 0;
-		})
+    // console.log('sumDailyWorker', sumDailyWorker);
+    const passMinimunHours = !sumDailyWorker.some(elem => {
+      return elem < this.minimunDailyWorkHours && elem !== 0;
+    });
 
-		return { passMinimunHours: passMinimunHours, day: day - 1};
+		return { passMinimunHours: passMinimunHours, sumDailyWorker: sumDailyWorker};
   }
 
 

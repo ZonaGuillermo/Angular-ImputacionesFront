@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(pForm: any) {
     this.employeesService.Login(pForm.value).subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       if (response?.token) {
         localStorage.setItem('token', response.token);
         localStorage.setItem('employee', JSON.stringify(response));
