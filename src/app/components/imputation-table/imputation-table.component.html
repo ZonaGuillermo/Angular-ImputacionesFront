@@ -26,7 +26,7 @@
 										<td *ngFor="let imputation of item.imputations" [ngClass]="{ 'underMinimun': sumDailyWorker[imputation.day - 1] > 0 && sumDailyWorker[imputation.day - 1] < minimunDailyWorkHours }">
 											<!-- <input type="hidden" [(ngModel)]="imputation.date" [ngModelOptions]="{standalone: true}"> -->
 											<input type="number" min="1" max="24" class="form-control" 
-											[disabled]="imputation.date < currentDate || imputation.state === 1"
+											[disabled]="imputation.week < currentWeek || imputation.state === 1 || imputation.state === 2"
 											[value]="imputation.hours" [(ngModel)]="imputation.hours" [ngModelOptions]="{standalone: true}">
 										</td>
 									</tr>

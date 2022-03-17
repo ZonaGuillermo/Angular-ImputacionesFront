@@ -1,6 +1,4 @@
-<div class="container ms-auto text-center">
-
-  <form [formGroup]="projectForm" class="d-flex justify-content-center">
+  <form [formGroup]="projectForm" class="d-flex justify-content-center ms-auto text-center">
     <div>
       <h5 class="mb-3">Escoge un projecto</h5>
       <select class="form-select" formControlName="project">
@@ -11,5 +9,4 @@
 
   <hr class="my-5">
 
-  <h3 class="pt-4 mb-4">{{ projectName }}</h3>
-</div>
+  <h3 class="pt-4 mb-4 text-center">{{ projectName }}</h3>
