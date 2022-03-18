@@ -32,7 +32,10 @@ export class CalendarWeekComponent implements OnInit {
     this.weekForm.valueChanges.subscribe((value) => {
       // console.log('cambios:', value)
       this.selectWeek.emit(value);
-    })
+    });
+
+    // console.log('this.weekForm.value.week', this.weekForm.value.week);
+    // this.selectWeek.emit(this.weekForm.value.week);
   }
 
 }

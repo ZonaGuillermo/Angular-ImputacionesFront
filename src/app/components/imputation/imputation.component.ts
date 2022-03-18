@@ -10,33 +10,23 @@ import * as moment from 'moment'
 })
 export class ImputationComponent implements OnInit {
 
-  employee: Employee | null;
+  employee = JSON.parse(localStorage.getItem('employee')!); // el (!) evita el null
   imputationsWeek: any; // Carga las imputaciones de TODA LA SEMANA que corresponda
+  arrImputationsWeek: any;
+  currentWeek = moment().format('ww');
   week: any;
 
   constructor(
     private imputationsService: ImputationsService
-
-  ) {
-    // Cargamos los datos del usuario para pintarlos en pantalla.
-    // Están guardados en el localStorage al cargar la página por el userService.
-    // El userService se carga al hacer Login.
-    this.employee = JSON.parse(localStorage.getItem('employee')!); // el (!) evita el null
-  }
+  ) { }
 
   
   // Cuando carga el componente tengo que detectar en q semana estoy y currentWeek tendra que almacenar el valor de la semana.
   // Averiguamos cual es la semana actual para pasarselo a LoadImputations
   async ngOnInit() {
-    const currentWeek = moment().format('ww');
-    // const fecha = moment().week(parseInt(currentWeek)).format('DD-MM-YYYY');
-    // const fechaSemana = moment().week(2).add(2, 'day').format('DD-MM-YYYY');
-    // console.log('fecha', fecha);
-    // console.log('fecha', fechaSemana);
-
     try {
-      this.imputationsWeek = await this.imputationsService.LoadImputations(currentWeek);
-      console.log('ngOnInit', this.imputationsWeek);
+      this.imputationsWeek = await this.imputationsService.LoadImputations(this.currentWeek);
+      // console.log('ngOnInit', this.imputationsWeek);
     } catch (error) {
       console.log(error);
     }
@@ -45,7 +35,7 @@ export class ImputationComponent implements OnInit {
 
   // Event del Output del componente calendar-Week para emitir la semana que seleccionemos.
   async getWeek($event: any) {
-    console.log('emitido', $event.week);
+    // console.log('emitido', $event.week);
 
     this.week = $event.week;
     try {
@@ -59,9 +49,14 @@ export class ImputationComponent implements OnInit {
 
   async recharge($event: string) {
     if ($event === 'ok') {
+      // console.log('this.week', this.week);
       try {
-        this.imputationsWeek = await this.imputationsService.LoadImputations(this.week);
-      console.log('recharge', this.imputationsWeek);
+        if (this.week) {
+          this.imputationsWeek = await this.imputationsService.LoadImputations(this.week);
+        } else {
+          this.imputationsWeek = await this.imputationsService.LoadImputations(this.currentWeek);
+        }
+      // console.log('recharge', this.imputationsWeek);
       } catch (error) {
         console.log(error);
       }

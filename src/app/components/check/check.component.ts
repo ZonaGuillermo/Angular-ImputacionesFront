@@ -30,11 +30,11 @@ export class CheckComponent implements OnInit {
     this.currentProjectId = $event;
     // Aquí la consulta al servicio para recoger las imputaciones por proyecto
     // this.currentProject = "Aquí va el objeto id=" + $event;
-    console.log('Estoy en getProjectSelected');
-    console.log('currentProjectId', this.currentProjectId);
+    // console.log('Estoy en getProjectSelected');
+    // console.log('currentProjectId', this.currentProjectId);
     this.checksService.LoadReviewByProjectId($event)
       .subscribe((response) => {
-        console.log('response', response);
+        // console.log('response', response);
         this.currentProjectFather = response;
         // this.imputationProject.controls['employeeName'].setValue(response.body.data[0].employeeName)
     })
@@ -50,7 +50,7 @@ export class CheckComponent implements OnInit {
 
   OnApproveAll() {
     this.checksService.SendAllReview(this.currentProjectId).subscribe(() => {
-      console.log('Estoy aquí');
+      // console.log('Estoy aquí');
       this.getProjectSelected(this.currentProjectId);
     })
   }
