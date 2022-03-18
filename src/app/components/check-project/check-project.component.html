@@ -2,11 +2,11 @@
     <div>
       <h5 class="mb-3">Escoge un projecto</h5>
       <select class="form-select" formControlName="project">
-        <option *ngFor="let project of projects" [value]="project.project_Id">{{ project.projectName }}</option>
+        <option *ngFor="let project of projects" [value]="project.project_Id">{{ project.projectName | titlecase }}</option>
       </select>
     </div>
   </form>
 
   <hr class="my-5">
 
-  <h3 class="pt-4 mb-4 text-center">{{ projectName }}</h3>
+  <h3 class="pt-4 mb-4 text-center">{{ projectName | titlecase }}</h3>

@@ -12,7 +12,7 @@
     <tr *ngFor="let imputation of currentProject" [ngClass]="{'approved': imputation.status === 2 ,'rejected': imputation.status === 3}">
       <!-- <p>{{ imputation.employeeName|json }}</p> -->
         <th scope="row" class="text-start align-middle">
-          {{ imputation.employeeName }}
+          {{ imputation.employeeName | titlecase }}
         </th>
         <td class="align-middle">
           {{ imputation.date }}
