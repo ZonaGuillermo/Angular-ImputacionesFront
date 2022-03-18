@@ -15,19 +15,20 @@
 						<table class="table table-responsive table-striped">
 							<thead class="text-center">
 								<th>#</th>
-								<th *ngFor="let day of arrWeekDays, index as i" [ngClass]="{ 'underMinimun': sumDailyWorker[i] > 0 && sumDailyWorker[i] < minimunDailyWorkHours }">{{ arrWeekDays[i] }}</th>
+								<th *ngFor="let day of arrWeekDays, index as i" [ngClass]="{ 'underMinimun': sumDailyWorker[i] > 0 && sumDailyWorker[i] < minimunDailyWorkHours }">{{ day }}</th>
 							</thead>
 							<tbody>
 								<!-- Recorremos el array de objetos imputationsWeek, donde están
 								las imputaciones horarias de la semana, para pintar los proyectos y las horas semanales de cada proyecto -->
 									<tr *ngFor="let item of imputationsWeek">
-										<th class="nombreProyecto">{{ item.projectName }}</th>
+										<th class="nombreProyecto text-start align-middle">{{ item.projectName | titlecase }}</th>
 
 										<td *ngFor="let imputation of item.imputations" [ngClass]="{ 'underMinimun': sumDailyWorker[imputation.day - 1] > 0 && sumDailyWorker[imputation.day - 1] < minimunDailyWorkHours }">
-											<!-- <input type="hidden" [(ngModel)]="imputation.date" [ngModelOptions]="{standalone: true}"> -->
+
 											<input type="number" min="1" max="24" class="form-control" 
 											[disabled]="imputation.week < currentWeek || imputation.state === 1 || imputation.state === 2"
 											[value]="imputation.hours" [(ngModel)]="imputation.hours" [ngModelOptions]="{standalone: true}">
+											
 										</td>
 									</tr>
 							</tbody>

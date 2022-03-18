@@ -40,7 +40,7 @@ export class ImputationsService {
       });
     });
 
-    // console.log('result', result);
+    console.log('result', result);
 
       return lastValueFrom(this.httpClient.post<any>(this.baseUrl + 'Imputation/ImputationPost', result));
   }

@@ -36,6 +36,7 @@ export class ImputationComponent implements OnInit {
 
     try {
       this.imputationsWeek = await this.imputationsService.LoadImputations(currentWeek);
+      console.log('ngOnInit', this.imputationsWeek);
     } catch (error) {
       console.log(error);
     }
@@ -58,7 +59,12 @@ export class ImputationComponent implements OnInit {
 
   async recharge($event: string) {
     if ($event === 'ok') {
-      this.imputationsWeek = await this.imputationsService.LoadImputations(this.week);
+      try {
+        this.imputationsWeek = await this.imputationsService.LoadImputations(this.week);
+      console.log('recharge', this.imputationsWeek);
+      } catch (error) {
+        console.log(error);
+      }
 
     }
   }
