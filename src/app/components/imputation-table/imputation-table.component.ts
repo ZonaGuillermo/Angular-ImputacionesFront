@@ -23,7 +23,7 @@ export class ImputationTableComponent implements OnInit {
   ) { 
     const employee = JSON.parse(localStorage.getItem('employee')!);
     this.minimunDailyWorkHours = employee.calendar.daily_Hours;
-    this.arrWeekDays = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+    this.arrWeekDays = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
     this.sumDailyWorker = new Array(7);
     this.datosGuardados = new EventEmitter();
   }
